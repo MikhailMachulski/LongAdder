@@ -5,13 +5,13 @@ import java.util.concurrent.atomic.LongAdder;
 
 
 public class Main {
-    static LongAdder longAdder = new LongAdder();
 
     public static void main(String[] args) {
+        LongAdder longAdder = new LongAdder();
 
-        Shop shop = new Shop("First");
-        Shop shopTwo = new Shop("Second");
-        Shop shopThree = new Shop("Third");
+        Shop shop = new Shop("First", longAdder);
+        Shop shopTwo = new Shop("Second", longAdder);
+        Shop shopThree = new Shop("Third", longAdder);
 
         shop.start();
         shopTwo.start();
@@ -28,26 +28,6 @@ public class Main {
 
     }
 
-    static class Shop extends Thread {
-        final Random random = new Random();
-
-        public Shop(String name) {
-            super(name);
-        }
-
-        @Override
-        public void run() {
-            try {
-                int[] earnings = new int[10];
-                for (int i = 0; i < earnings.length; i++) {
-                    earnings[i] = random.nextInt(1000);
-                    longAdder.add(earnings[i]);
-                }
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-        }
-    }
 
 }
 
