@@ -1,10 +1,7 @@
 package com.company;
 
 import java.util.Random;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.LongAdder;
-import java.util.concurrent.Callable;
 
 
 public class Main {
@@ -19,6 +16,13 @@ public class Main {
         shop.start();
         shopTwo.start();
         shopThree.start();
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException exception) {
+            exception.printStackTrace();
+        }
+
 
         System.out.println(longAdder.sum());
 
@@ -36,7 +40,7 @@ public class Main {
             try {
                 int[] earnings = new int[10];
                 for (int i = 0; i < earnings.length; i++) {
-                    earnings [i] = random.nextInt(1000);
+                    earnings[i] = random.nextInt(1000);
                     longAdder.add(earnings[i]);
                 }
             } catch (Exception exception) {
